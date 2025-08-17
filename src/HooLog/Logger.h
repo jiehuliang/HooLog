@@ -58,4 +58,4 @@ private:
 
 }
 
-#endif LOGGER_H
+#endif //LOGGER_H
