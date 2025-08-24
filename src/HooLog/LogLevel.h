@@ -19,17 +19,17 @@ public:
 	static const char* toString(value level) {
 		switch (level) {
 		case value::TRACE:
-			return " TRACE ";
+			return "\033[36mTRACE\033[0m";
 		case value::DEBUG:
-			return " DEBUG ";
+			return "\033[35mDEBUG\033[0m";
 		case value::INFO:
-			return " INFO  ";
+			return "\033[32mINFO\033[0m";
 		case value::WARN:
-			return " WARN  ";
+			return "\033[33mWARN\033[0m";
 		case value::ERROR:
-			return " ERROR ";
+			return "\033[31mERROR\033[0m";
 		case value::FATAL:
-			return " FATAL ";
+			return "\033[1;31mFATAL\033[0m";
 		}
 		return nullptr;
 	}

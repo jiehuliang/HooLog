@@ -55,6 +55,10 @@ public:
 	
 	const Buffer& buffer();
 
+	const char* data();
+
+	int length();
+
 	void resetBuffer();
 
 	void toString();
@@ -148,6 +152,14 @@ void LogStream::append(const char* data, int len) {
 
 const LogStream::Buffer& LogStream::buffer() {
 	return buffer_;
+}
+
+const char* LogStream::data() {
+	return buffer_.start();
+}
+
+int LogStream::length() {
+	return buffer_.len();
 }
 
 void LogStream::resetBuffer() {

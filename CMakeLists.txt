@@ -18,7 +18,7 @@ set(SUB_DIR_LIST "HooLog")
 foreach(SUB_DIR ${SUB_DIR_LIST})
     #遍历源文件
     #Traverse source file
-    aux_source_directory(src/${SUB_DIR} SRC_LIST)
+    #aux_source_directory(src/${SUB_DIR} SRC_LIST)
     include_directories(src/${SUB_DIR} INC_LIST)
 endforeach()
 
