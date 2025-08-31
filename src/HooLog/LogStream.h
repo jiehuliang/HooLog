@@ -9,7 +9,6 @@
 
 namespace HooLog {
 static const int FixedBufferSize = 4096;
-static const int FixedLargeBufferSize = 4096 * 1000;
 static const int kMaxNumericSize = 48;
 
 template<int SIZE>

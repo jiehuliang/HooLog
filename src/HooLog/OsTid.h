@@ -16,7 +16,7 @@ inline unsigned long os_tid() noexcept {
 #include <unistd.h>
 #include <sys/syscall.h>
 inline pid_t os_tid() noexcept {
-	return static_cast<pid_t>(::syscall(SYS_gettid))
+	return static_cast<pid_t>(::syscall(SYS_gettid));
 }
 
 #else
