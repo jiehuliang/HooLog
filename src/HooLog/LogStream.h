@@ -145,71 +145,71 @@ void LogStream::fmt(const char* fmt, Args&&... args) {
 	buffer_.add(add);
 }
 
-void LogStream::append(const char* data, int len) {
+inline void LogStream::append(const char* data, int len) {
 	buffer_.append(data, len);
 }
 
-const LogStream::Buffer& LogStream::buffer() {
+inline const LogStream::Buffer& LogStream::buffer() {
 	return buffer_;
 }
 
-const char* LogStream::data() {
+inline const char* LogStream::data() {
 	return buffer_.start();
 }
 
-int LogStream::length() {
+inline int LogStream::length() {
 	return buffer_.len();
 }
 
-void LogStream::resetBuffer() {
+inline void LogStream::resetBuffer() {
 	buffer_.bzero();
 }
 
-void LogStream::toString() {
+inline void LogStream::toString() {
 	std::cout << buffer_.start();
 }
 
-LogStream& LogStream::operator<<(bool v) {
+inline LogStream& LogStream::operator<<(bool v) {
 	buffer_.append(v ? "true" : "false", v ? 4 : 5);
 	return *this;
 }
 
-LogStream& LogStream::operator<<(short num) {
+inline LogStream& LogStream::operator<<(short num) {
 	return *this << static_cast<int>(num);
 }
-LogStream& LogStream::operator<<(int num) {
+inline LogStream& LogStream::operator<<(int num) {
 	formatInteger(num);
 	return *this;
 }
-LogStream& LogStream::operator<<(long num) {
+inline LogStream& LogStream::operator<<(long num) {
 	formatInteger(num);
 	return *this;
 }
-LogStream& LogStream::operator<<(long long num) {
+inline LogStream& LogStream::operator<<(long long num) {
 	formatInteger(num);
 	return *this;
 }
 
-LogStream& LogStream::operator<<(unsigned short num) {
+inline LogStream& LogStream::operator<<(unsigned short num) {
 	return *this << static_cast<unsigned int>(num);
 }
-LogStream& LogStream::operator<<(unsigned int num) {
+inline LogStream& LogStream::operator<<(unsigned int num) {
 	formatInteger(num);
 	return *this;
 }
-LogStream& LogStream::operator<<(unsigned long num) {
+inline LogStream& LogStream::operator<<(unsigned long num) {
 	formatInteger(num);
 	return *this;
 }
-LogStream& LogStream::operator<<(unsigned long long num) {
+inline LogStream& LogStream::operator<<(unsigned long long num) {
 	formatInteger(num);
 	return *this;
 }
 
-LogStream& LogStream::operator<<(const float& num) {
+inline LogStream& LogStream::operator<<(const float& num) {
 	return *this << static_cast<double>(num);
 }
-LogStream& LogStream::operator<<(const double& num) {
+inline LogStream& LogStream::operator<<(const double& num) {
 	char buf[32];
 	int len = snprintf(buf, sizeof(buf), "%g", num);
 	len = len > static_cast<int>(sizeof(buf) - 1) ? sizeof(buf) - 1 : len;
@@ -217,15 +217,15 @@ LogStream& LogStream::operator<<(const double& num) {
 	return *this;
 }
 
-LogStream& LogStream::operator<<(char data) {
+inline LogStream& LogStream::operator<<(char data) {
 	buffer_.append(&data, 1);
 	return *this;
 }
-LogStream& LogStream::operator<<(const char* data) {
+inline LogStream& LogStream::operator<<(const char* data) {
 	buffer_.append(data, strlen(data));
 	return *this;
 }
-LogStream& LogStream::operator<<(const std::string& v) {
+inline LogStream& LogStream::operator<<(const std::string& v) {
 	buffer_.append(v.c_str(), v.size());
 	return *this;
 }

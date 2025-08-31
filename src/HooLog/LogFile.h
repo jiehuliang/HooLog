@@ -26,7 +26,7 @@ static const std::string DefaultPath = ".\\Log\\hoolog.log";
 
 #define access _access
 
-int mkdir(const char* path, int mode) {
+inline int mkdir(const char* path, int mode) {
 	return _mkdir(path);
 }
 #elif defined(__linux__)

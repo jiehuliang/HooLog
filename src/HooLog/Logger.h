@@ -19,8 +19,8 @@ using OutputFunc = std::function<void(const char* msg, int length)>;
 using FlushFunc = std::function<void()>;
 
 //缓存当前线程存日期时间字符串、上一次日志记录的秒数,提升日期格式化效率
-thread_local char t_time[64];	//当前线程存日期的时间字符串 “年:月:日 时:分:秒”
-thread_local int64_t t_lastseconds;	//当前线程上一次记录日志的秒数
+thread_local static char t_time[64];	//当前线程存日期的时间字符串 “年:月:日 时:分:秒”
+thread_local static int64_t t_lastseconds;	//当前线程上一次记录日志的秒数
 
 inline uint64_t getCacheTid() {
 	static thread_local uint64_t t_cacheTid = 0;
@@ -31,11 +31,11 @@ inline loglevel& GetLogLevel() {
 	static loglevel g_loglevel = loglevel::INFO;
 	return g_loglevel;
 }
-void defaultOutput(const char* msg, int len) {
+inline void defaultOutput(const char* msg, int len) {
 	fwrite(msg, 1, len, stdout);	// 默认写出到stdout
 }
 
-void defaultFlush() {
+inline void defaultFlush() {
 	fflush(stdout);		// 默认flush到stdout
 }
 
@@ -49,15 +49,15 @@ inline FlushFunc& GetFlushFunc() {
 	return g_flush;
 }
 
-void setLogLevel(loglevel level) {
+inline void setLogLevel(loglevel level) {
 	GetLogLevel() = level;
 }
 
-void setOutputFunc(OutputFunc output) {
+inline void setOutputFunc(OutputFunc output) {
 	GetOutputFunc() = output;
 }
 
-void setFlushFunc(FlushFunc flush) {
+inline void setFlushFunc(FlushFunc flush) {
 	GetFlushFunc() = flush;
 }
 
